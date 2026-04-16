@@ -294,9 +294,9 @@ h1.hero-title em{
 }
 .stat-row:last-child{border-bottom:none;padding-bottom:0}
 .stat-row:first-of-type{padding-top:0}
-.stat-label{font-size:13px;color:var(--cream-dim)}
-.stat-val{font-family:'Fraunces',serif;font-size:28px;color:var(--gold);font-weight:500}
-.stat-val small{font-size:13px;color:var(--cream-dim);margin-left:4px;font-family:'Manrope',sans-serif;font-weight:400}
+.stat-label{font-size:14px;color:var(--cream-dim)}
+.stat-val{font-family:'Fraunces',serif;font-size:24px;color:var(--gold);font-weight:500;text-align:right;white-space:nowrap}
+.stat-val small{font-size:14px;color:var(--cream-dim);margin-left:6px;font-family:'Manrope',sans-serif;font-weight:400}
 
 @keyframes fadeUp{
   to{opacity:1;transform:translateY(0)}
@@ -422,6 +422,75 @@ h2 em{font-style:italic;color:var(--gold);font-weight:300}
   line-height:1.2;
 }
 .step-content p{color:var(--cream-dim);font-size:14px}
+
+/* ============ FINANCIAL BREAKDOWN ============ */
+.fin-breakdown{background:var(--midnight-2);position:relative;overflow:hidden}
+.fin-breakdown::before{
+  content:'';position:absolute;
+  bottom:-200px;left:-200px;width:500px;height:500px;
+  background:radial-gradient(circle, rgba(43,127,216,0.08),transparent 60%);
+  border-radius:50%;
+}
+.fin-banner{
+  padding:28px 36px;
+  background:linear-gradient(135deg, rgba(43,127,216,0.12), rgba(43,127,216,0.04));
+  border:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:40px;flex-wrap:wrap;gap:24px;
+}
+@media(max-width:640px){.fin-banner{flex-direction:column;text-align:center}}
+.fin-banner-text h3{
+  font-family:'Fraunces',serif;font-size:24px;font-weight:500;
+  margin-bottom:8px;
+}
+.fin-banner-text p{color:var(--cream-dim);font-size:15px;max-width:600px;margin:0}
+.fin-banner-num{
+  font-family:'Fraunces',serif;font-size:42px;font-weight:500;
+  color:var(--gold);line-height:1;text-align:right;
+}
+.fin-banner-num small{display:block;font-family:'Manrope',sans-serif;font-size:13px;color:var(--cream-dim);font-weight:400;margin-top:6px}
+.fin-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;
+  position:relative;z-index:2;
+}
+@media(max-width:880px){.fin-cards{grid-template-columns:1fr}}
+.fin-card{
+  background:var(--midnight);
+  border:1px solid var(--line);
+  padding:36px 32px;
+}
+.fin-card-title{
+  font-size:11px;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--cream-dim);font-weight:600;
+  padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:8px;
+}
+.fin-card .fc-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;font-size:15px;
+  border-bottom:1px solid rgba(43,127,216,0.08);
+}
+.fin-card .fc-row:last-child{border-bottom:none}
+.fin-card .fc-row.fc-total{
+  border-top:1px solid var(--line);
+  margin-top:6px;padding-top:18px;
+  border-bottom:none;
+}
+.fc-label{color:var(--cream-dim)}
+.fc-val{font-family:'Fraunces',serif;font-weight:500;font-size:18px}
+.fc-val.highlight{color:var(--gold);font-size:22px}
+.fin-card-note{
+  margin-top:20px;padding:16px;
+  background:rgba(43,127,216,0.06);
+  border:1px solid var(--line);
+  font-size:13px;color:var(--cream-dim);
+  line-height:1.6;
+}
+.fin-card-note strong{color:var(--gold)}
+.fin-card-footer{
+  margin-top:20px;
+  font-size:13px;color:var(--cream-dim);
+  font-style:italic;
+}
 
 /* ============ STATS RIBBON ============ */
 .ribbon{
@@ -935,19 +1004,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="hero-card-label">Standard Investment Property vs Duplex · Indicative</div>
         <div class="stat-row">
           <span class="stat-label">Combined Weekly Rent</span>
-          <span class="stat-val">$1,300–$2,400<small>per duplex</small></span>
+          <span class="stat-val">$1,300–$2,400</span>
         </div>
         <div class="stat-row">
           <span class="stat-label">Equity Uplift on Subdivision</span>
-          <span class="stat-val">$250K–$500K<small>typical</small></span>
+          <span class="stat-val">$250K–$500K</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Vacancy Risk Exposure</span>
-          <span class="stat-val">50%<small>vs 100%</small></span>
+          <span class="stat-label">Vacancy Risk</span>
+          <span class="stat-val">50% <small>vs 100%</small></span>
         </div>
         <div class="stat-row">
           <span class="stat-label">Depreciation Schedules</span>
-          <span class="stat-val">2<small>vs 1</small></span>
+          <span class="stat-val">2 <small>vs 1</small></span>
         </div>
       </aside>
     </div>
@@ -1262,6 +1331,76 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- FINANCIAL BREAKDOWN -->
+<section class="block fin-breakdown">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">The Numbers in Detail</div>
+      <h2 class="serif">What a typical duplex project<br><em>delivers financially.</em></h2>
+    </div>
+
+    <div class="fin-banner reveal">
+      <div class="fin-banner-text">
+        <h3>Rental Income Potential</h3>
+        <p>Depending on location, each dwelling can achieve between <strong>$650 – $1,000 per week</strong> in rent — giving you a combined gross yield of up to <strong>$104,000 per year</strong>.</p>
+      </div>
+      <div class="fin-banner-num">$650–$1K<small>per dwelling / week</small></div>
+    </div>
+
+    <div class="fin-cards reveal">
+      <div class="fin-card">
+        <div class="fin-card-title">Project Costs</div>
+        <div class="fc-row">
+          <span class="fc-label">Land Purchase</span>
+          <span class="fc-val">$750,000</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-label">Build Cost (both dwellings)</span>
+          <span class="fc-val">$700,000</span>
+        </div>
+        <div class="fc-row fc-total">
+          <span class="fc-label">Total Project Cost</span>
+          <span class="fc-val">$1,450,000</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-label">Combined End Value</span>
+          <span class="fc-val highlight">$1,700,000+</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-label">Projected Equity Uplift</span>
+          <span class="fc-val highlight">$250,000+</span>
+        </div>
+        <p class="fin-card-footer">Sell one or both dwellings individually to realise your equity — or hold and let the rent work for you.</p>
+      </div>
+
+      <div class="fin-card">
+        <div class="fin-card-title">Rental Income (Conservative Estimate)</div>
+        <div class="fc-row">
+          <span class="fc-label">Dwelling One Rent</span>
+          <span class="fc-val">$650/week</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-label">Dwelling Two Rent</span>
+          <span class="fc-val">$650/week</span>
+        </div>
+        <div class="fc-row fc-total">
+          <span class="fc-label">Total Weekly Rent</span>
+          <span class="fc-val highlight">$1,300</span>
+        </div>
+        <div class="fc-row">
+          <span class="fc-label">Annual Gross Rent</span>
+          <span class="fc-val highlight">$67,600</span>
+        </div>
+        <div class="fin-card-note">
+          In premium locations, rents of <strong>$800–$1,000/week</strong> per dwelling are achievable — pushing annual income to <strong>$104,000+</strong>.
+        </div>
+      </div>
+    </div>
+
+    <p class="indicative-note" style="margin-top:36px">All figures are indicative only. Actual costs, valuations and rental income vary based on location, market conditions and individual project specifications.</p>
   </div>
 </section>
 
