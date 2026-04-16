@@ -958,10 +958,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="compare">
   <div class="container">
     <div class="compare-grid">
-      <div class="compare-item"><div class="compare-num">100+</div><div class="compare-label">Duplexes Delivered</div></div>
-      <div class="compare-item"><div class="compare-num">$250K+</div><div class="compare-label">Typical Equity Uplift</div></div>
-      <div class="compare-item"><div class="compare-num">2x</div><div class="compare-label">Rental Income</div></div>
-      <div class="compare-item"><div class="compare-num">100%</div><div class="compare-label">Turnkey Builds</div></div>
+      <div class="compare-item"><div class="compare-num" data-target="100" data-suffix="+">0</div><div class="compare-label">Duplexes Delivered</div></div>
+      <div class="compare-item"><div class="compare-num" data-prefix="$" data-target="250" data-suffix="K+">0</div><div class="compare-label">Typical Equity Uplift</div></div>
+      <div class="compare-item"><div class="compare-num" data-target="2" data-suffix="x">0</div><div class="compare-label">Rental Income</div></div>
+      <div class="compare-item"><div class="compare-num" data-target="100" data-suffix="%">0</div><div class="compare-label">Turnkey Builds</div></div>
     </div>
   </div>
 </section>
@@ -1593,6 +1593,36 @@ document.getElementById('eligibilityModal').addEventListener('click',e=>{
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape')closeEligibility();
 });
+
+// Rolling number counter
+function animateCounter(el){
+  const target=parseInt(el.dataset.target);
+  const prefix=el.dataset.prefix||'';
+  const suffix=el.dataset.suffix||'';
+  const duration=2000;
+  const start=performance.now();
+  function easeOut(t){return 1-Math.pow(1-t,3)}
+  function tick(now){
+    const elapsed=now-start;
+    const progress=Math.min(elapsed/duration,1);
+    const current=Math.round(easeOut(progress)*target);
+    el.textContent=prefix+current+suffix;
+    if(progress<1)requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+const counterObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.compare-num[data-target]').forEach((el,i)=>{
+        setTimeout(()=>animateCounter(el), i*200);
+      });
+      counterObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+const compareGrid=document.querySelector('.compare-grid');
+if(compareGrid)counterObserver.observe(compareGrid);
 </script>
 
 </body>
